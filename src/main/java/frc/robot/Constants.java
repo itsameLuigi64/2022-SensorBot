@@ -20,7 +20,10 @@ public final class Constants {
 
         }
         public final class DioPort {
-            
+            public static final int kBeamBreak = 0;
+        }
+        public final class AnalogPort {
+            public static final int kUltraSonic = 0;
         }
         public final class CanID {
             public static final int kLeftLeader = 11;
@@ -33,7 +36,7 @@ public final class Constants {
 
     // Connections to the Drivers' Station Laptop
     public static final class Laptop {
-        public final class UsbPorts {
+        public final class UsbPort {
             public static final int kGamePad = 2;
             public static final int kFlightJoystick = 3;
         }

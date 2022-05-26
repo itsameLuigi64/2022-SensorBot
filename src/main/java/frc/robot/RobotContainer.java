@@ -22,6 +22,7 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private DriveSubsystem m_driveSubsystem = null;
+  private SensorArraySubsystem m_sensorArray = null;
 
   // Operator interface
   private Joystick m_gamePad = null;
@@ -33,9 +34,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Subsystems (comment out to exclude a subsystem from the robot)
     m_driveSubsystem = new DriveSubsystem();
+    m_sensorArray = new SensorArraySubsystem();
 
     // Controllers (comment out to exclude a controller from the laptop)
-    m_gamePad = new Joystick(Laptop.UsbPorts.kGamePad);
+    m_gamePad = new Joystick(Laptop.UsbPort.kGamePad);
 
     // Cameras (comment out to exclude a camera from the robot);
     //m_camera1 = CameraServer.startAutomaticCapture(0);
@@ -61,6 +63,12 @@ public class RobotContainer {
         .whenPressed(() -> m_driveSubsystem.resetEncoders()
       );
     }
+
+    if (m_sensorArray != null && m_gamePad != null) {
+      new JoystickButton(m_gamePad, GamePad.Button.kLB)
+        .whenPressed(() -> m_sensorArray.reset()
+      );
+    };
   }
 
     /**
