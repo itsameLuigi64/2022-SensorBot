@@ -20,7 +20,8 @@ public final class Constants {
 
         }
         public final class DioPort {
-            public static final int kBeamBreak = 0;
+            public static final int kBeamBreak = 5;
+            public static final int kLimitSwitch = 2;
         }
         public final class AnalogPort {
             public static final int kUltraSonic = 0;

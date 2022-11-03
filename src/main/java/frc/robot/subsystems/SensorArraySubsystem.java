@@ -17,13 +17,15 @@ public class SensorArraySubsystem extends SubsystemBase {
   private static double kUltraSonicScaleFactor = 1024.0;
 
   private DigitalInput m_beamBreak = null;
+  private DigitalInput m_limitSwitch = null;
   private AnalogInput m_ultraSonic = null;
 
   /** Creates a new SensorArraySubsystem. */
   public SensorArraySubsystem() {
     // Sensors (uncomment to exclude from the robot)
     m_beamBreak = new DigitalInput(RoboRio.DioPort.kBeamBreak);
-    m_ultraSonic = new AnalogInput(RoboRio.AnalogPort.kUltraSonic);
+    m_limitSwitch = new DigitalInput(RoboRio.DioPort.kLimitSwitch);
+    //m_ultraSonic = new AnalogInput(RoboRio.AnalogPort.kUltraSonic);
   }
 
   @Override
@@ -37,6 +39,9 @@ public class SensorArraySubsystem extends SubsystemBase {
 
       SmartDashboard.putNumber("UltraSonic Voltage", voltage);
       SmartDashboard.putNumber("UltraSonic Distance", voltage * kUltraSonicScaleFactor);
+    }
+    if (m_limitSwitch != null) {
+      SmartDashboard.putBoolean("Switchy", m_limitSwitch.get());
     }
   }
 

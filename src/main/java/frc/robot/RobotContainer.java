@@ -34,7 +34,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Subsystems (comment out to exclude a subsystem from the robot)
     m_driveSubsystem = new DriveSubsystem();
-    m_sensorArray = new SensorArraySubsystem();
+    //m_sensorArray = new SensorArraySubsystem();
 
     // Controllers (comment out to exclude a controller from the laptop)
     m_gamePad = new Joystick(Laptop.UsbPort.kGamePad);
@@ -78,7 +78,7 @@ public class RobotContainer {
 
     if (m_driveSubsystem != null && m_gamePad != null) {
       m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand(m_driveSubsystem, 
-        () -> -m_gamePad.getRawAxis(GamePad.RightStick.kUpDown), 
+        () -> m_gamePad.getRawAxis(GamePad.RightStick.kUpDown), 
         () -> m_gamePad.getRawAxis(GamePad.LeftStick.kLeftRight)
       ));
     }
