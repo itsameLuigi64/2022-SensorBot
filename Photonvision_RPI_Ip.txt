@@ -1,0 +1,3 @@
+to conect to photonvision rasberry pi,
+ when you are conected to sensor bot.
+ http://"rpi ip":5800
