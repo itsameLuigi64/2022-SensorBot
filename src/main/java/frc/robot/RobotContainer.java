@@ -59,9 +59,22 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     if (m_driveSubsystem != null && m_gamePad != null) {
+
       new JoystickButton(m_gamePad, GamePad.Button.kRB)
-        .whenPressed(() -> m_driveSubsystem.resetEncoders()
-      );
+        .whenPressed(() -> m_driveSubsystem.resetEncoders(), m_driveSubsystem)
+      ;
+
+      // Testing turning the robot
+      new JoystickButton(m_gamePad, GamePad.Button.kX)
+        .whileHeld(() -> m_driveSubsystem.arcadeDrive(0, 0.2), m_driveSubsystem)
+        .whenReleased(() -> m_driveSubsystem.stop(), m_driveSubsystem)
+      ;
+      
+      // Testing turning the robot
+      new JoystickButton(m_gamePad, GamePad.Button.kY)
+        .whileHeld(() -> m_driveSubsystem.arcadeDrive(0, -0.2), m_driveSubsystem)
+        .whenReleased(() -> m_driveSubsystem.stop(), m_driveSubsystem)
+      ;
     }
 
     if (m_sensorArray != null && m_gamePad != null) {
@@ -77,7 +90,7 @@ public class RobotContainer {
   private void configureDefaultCommands() {
 
     if (m_driveSubsystem != null && m_gamePad != null) {
-      m_driveSubsystem.setDefaultCommand(new ArcadeDriveCommand(m_driveSubsystem, 
+      m_driveSubsystem.setDefaultCommand(new ScaledArcadeDriveCommand(m_driveSubsystem, 
         () -> m_gamePad.getRawAxis(GamePad.RightStick.kUpDown), 
         () -> m_gamePad.getRawAxis(GamePad.LeftStick.kLeftRight)
       ));
