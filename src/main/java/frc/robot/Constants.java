@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -17,7 +19,7 @@ public final class Constants {
     // Connections to the RoboRio
     public static final class RoboRio {
         public final class PwmPort {
-
+            // No PWM ports currently defined
         }
         public final class DioPort {
             public static final int kBeamBreak = 5;
@@ -33,13 +35,36 @@ public final class Constants {
             public static final int kRightFollower = 14;
             public static final int kPDP = 0;
         }
-    }
+    }    
 
     // Connections to the Drivers' Station Laptop
     public static final class Laptop {
         public final class UsbPort {
             public static final int kGamePad = 2;
             public static final int kFlightJoystick = 3;
+        }
+    }
+
+    public static final class RobotConfig {
+        public static final class Camera {
+            public static final double kHeightInMeters = Units.inchesToMeters(12);
+            public static final double kPitchInRadians = Units.degreesToRadians(0);
+        }
+        /* The following is an estimate. We need to confirm with the actual robot and remove this comment. */
+        public static final double kDistancePerRotation = 2 * Math.PI * 6.0;
+    }
+
+    public static final class RobotCharacterization {
+        // Need to characterize the robot to determine the actual values
+        public static final double kAngularP = 0.1;
+        public static final double kAngularD = 0.0;
+        public static final double kLinearP = 0.1;
+        public static final double kLinearD = 0.0;
+    }
+
+    public static final class Field {
+        public static final class Target1 {
+            public static final double kHeightInMeters = Units.feetToMeters(3);
         }
     }
 
@@ -51,6 +76,7 @@ public final class Constants {
             public static final int kRotate = 2;
             public static final int kThrottle = 3;
         }
+        // Buttons are already numbered, so no translation needed
     }
     
     // Constants for the gamepad joysticks & buttons
@@ -78,5 +104,6 @@ public final class Constants {
             /* Joystick click: kLeftStick = 11, kRightStick = 12 */
         }    
     }
+
     
 }
