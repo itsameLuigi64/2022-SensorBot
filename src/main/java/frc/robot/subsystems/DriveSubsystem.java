@@ -13,6 +13,9 @@ import com.revrobotics.RelativeEncoder;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SPI;
@@ -89,6 +92,10 @@ public class DriveSubsystem extends SubsystemBase {
     // SmartDashboard.putNumber("Right Encoder Distance", m_rightEncoder.getPosition());
     // SmartDashboard.putNumber("Left Drive Motor Speed", m_leftLeader.get());
     // SmartDashboard.putNumber("Right Drive Motor Speed", m_rightLeader.get());
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+    NetworkTable table = inst.getTable("photonvision/Microsoft_LifeCam_HD-3000");
+    SmartDashboard.putBoolean("NT-hasTarget", table.getEntry("hasTarget").getBoolean(false));
+
   }
 
   /**

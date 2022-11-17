@@ -13,6 +13,8 @@ import frc.robot.subsystems.*;
 
 import static frc.robot.Constants.*;
 
+import org.photonvision.PhotonCamera;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -30,6 +32,8 @@ public class RobotContainer {
   // Cameras
   private UsbCamera m_camera1;
 
+  private PhotonCamera m_photonCamera;
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Subsystems (comment out to exclude a subsystem from the robot)
@@ -44,6 +48,8 @@ public class RobotContainer {
     if (m_camera1 != null) {
       m_camera1.setResolution(320, 240);
     }
+
+    m_photonCamera = new PhotonCamera("photonvision/Microsoft_LifeCam_HD-3000");
 
     // Configure the button bindings
     configureButtonBindings();
@@ -72,7 +78,7 @@ public class RobotContainer {
       
       // Testing turning the robot
       new JoystickButton(m_gamePad, GamePad.Button.kY)
-        .whileHeld(() -> m_driveSubsystem.arcadeDrive(0, -0.2), m_driveSubsystem)
+        .whileHeld(new AutoAimCommand(m_driveSubsystem, m_photonCamera), true)
         .whenReleased(() -> m_driveSubsystem.stop(), m_driveSubsystem)
       ;
     }

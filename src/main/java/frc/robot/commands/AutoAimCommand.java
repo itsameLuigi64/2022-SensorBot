@@ -7,6 +7,7 @@ package frc.robot.commands;
 import org.photonvision.PhotonCamera;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.RobotCharacterization;
 import frc.robot.subsystems.DriveSubsystem;
@@ -41,15 +42,23 @@ public class AutoAimCommand extends CommandBase {
     double forwardSpeed = 0;
     double rotationSpeed = 0;
 
+    final double kMaxRotation = 0.25;
+
     // Query the latest result from PhotonVision
     var result = m_camera.getLatestResult();
+    SmartDashboard.putBoolean("hasTargets", result.hasTargets());
 
     if (result.hasTargets()) {
+        SmartDashboard.putNumber("yaw", result.getBestTarget().getYaw());
         // Calculate angular turn power
         // -1.0 required to ensure positive PID controller effort _increases_ yaw
         rotationSpeed = -m_turnPIDController.calculate(result.getBestTarget().getYaw(), 0);
     } 
-    m_driveSubsystem.arcadeDrive(forwardSpeed, rotationSpeed);
+
+    rotationSpeed = Math.min(rotationSpeed, kMaxRotation);
+
+    //m_driveSubsystem.arcadeDrive(forwardSpeed, rotationSpeed);
+    SmartDashboard.putNumber("autoaim", rotationSpeed);
   }
 
   // Called once the command ends or is interrupted.
