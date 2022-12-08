@@ -97,8 +97,8 @@ public class RobotContainer {
 
     if (m_driveSubsystem != null && m_gamePad != null) {
       m_driveSubsystem.setDefaultCommand(new ScaledArcadeDriveCommand(m_driveSubsystem, 
-        () -> m_gamePad.getRawAxis(GamePad.RightStick.kUpDown), 
-        () -> m_gamePad.getRawAxis(GamePad.LeftStick.kLeftRight)
+        () -> m_gamePad.getRawAxis(GamePad.RightStick.kUpDown) * 0.5, 
+        () -> m_gamePad.getRawAxis(GamePad.LeftStick.kLeftRight) * 0.7
       ));
     }
   }
